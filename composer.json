@@ -1,0 +1,29 @@
+{
+    "name": "nickjbedford/randomstringgenerator",
+    "type": "library",
+    "description": "Provides methods to generate cryptographically strong random strings based on an input alphabet.",
+    "keywords": [
+		"caching", "php", "cache", "performance"
+	],
+    "homepage": "https://github.com/nickjbedford/randomstringgenerator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick Bedford",
+            "email": "nick@nickbedford.com",
+            "homepage": "https://github.com/nickjbedford",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Generators\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
