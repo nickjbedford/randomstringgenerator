@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Provides methods to generate cryptographically strong random strings based on an input alphabet.",
     "keywords": [
-		"caching", "php", "cache", "performance"
+		"random", "generator", "cryptography"
 	],
     "homepage": "https://github.com/nickjbedford/randomstringgenerator",
     "license": "MIT",
