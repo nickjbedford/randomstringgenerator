@@ -23,7 +23,10 @@
             "src/helpers.php"
         ]
     },
-    "require-dev": {
+	"require": {
+        "php": "7.4.*"
+	},
+	"require-dev": {
         "phpunit/phpunit": "*"
     }
 }
