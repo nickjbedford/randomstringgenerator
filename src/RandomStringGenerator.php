@@ -3,16 +3,24 @@
 	
 	namespace Generators;
 	
+	use Exception;
+	
 	/**
 	 * Provides methods to generate cryptographically strong random strings based on an input alphabet.
+	 * @package Generators
 	 */
 	class RandomStringGenerator
 	{
 		private array $alphabet = [];
-		public bool $wasCryptoStrong = false;
 		
 		/** Specifies the alphanumeric alphabet. */
 		const ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		/** Specifies the digits alphabet. */
+		const ALPHABET_DIGITS = '0123456789';
+		
+		/** Specifies the letters alphabet. */
+		const ALPHABET_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
 		/** Specifies the uppercase hexadecimal alphabet. */
 		const ALPHABET_HEX_UPPER = '0123456789ABCDEF';
@@ -23,13 +31,11 @@
 		/** Specifies the upper and lowercase hexadecimal alphabet. */
 		const ALPHABET_HEX = '0123456789abcdefABCDEF';
 		
-		/** Specifies the entire printable ASCII character set. */
-		const ALPHABET_ASCII = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+		/** Specifies the set of non-alphanumeric punctuation related characters. */
+		const ALPHABET_PUNCTUATION = '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
 		
-		private static function getRandomBytes(int $length, ?bool &$cryptoStrong = null): string
-		{
-			return openssl_random_pseudo_bytes($length, $cryptoStrong);
-		}
+		/** Specifies the entire printable ASCII character set. */
+		const ALPHABET_ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 		
 		/**
 		 * Initialises a new random string generator.
@@ -56,11 +62,12 @@
 		 * Generates a random string using the generator's alphabet.
 		 * @param int $length The length of the random string to generate.
 		 * @return string The random string.
+		 * @throws Exception If it was not possible to gather sufficient entropy.
 		 */
 		public function createString(int $length = 16): string
 		{
 			$alphabetLength = count($this->alphabet);
-			$bytes = self::getRandomBytes($length, $this->wasCryptoStrong);
+			$bytes = random_bytes($length);
 			
 			$string = '';
 			for($i = 0; $i < $length; $i++)
@@ -71,8 +78,9 @@
 		/**
 		 * Generates a random string using the specified alphabet.
 		 * @param int $length The length of the random string to generate.
-		 * @param string|null $alphabet
+		 * @param string|null $alphabet The alphabet to use to generate the string.
 		 * @return string The random string.
+		 * @throws Exception
 		 */
 		public static function generate(int $length = 16, ?string $alphabet = self::ALPHABET_ALPHANUMERIC): string
 		{
