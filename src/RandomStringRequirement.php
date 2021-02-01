@@ -18,20 +18,34 @@
 			$this->generator = new RandomStringGenerator($alphabet);
 		}
 		
-		/**
-		 * Generates one or more characters from the generator,
-		 * counting the number.
-		 * @param int $count If omitted, this generates the count of characters required.
-		 * @return string
-		 * @throws Exception
-		 */
-		public function generate(int $count = 0): string
-		{
-			return $this->generator->createString($count ?: $this->count);
-		}
-		
 		public function count(): int
 		{
 			return $this->count;
+		}
+		
+		/**
+		 * Generates the required number of characters for the requirement.
+		 * @return string
+		 * @throws Exception
+		 */
+		public function generate(): string
+		{
+			return $this->generator->createString($this->count);
+		}
+		
+		/**
+		 * Determines the number of characters found in the requirement's alphabet.
+		 * @param string $string
+		 * @return int
+		 */
+		public function matchedCount(string $string): int
+		{
+			$count = 0;
+			$length = strlen($string);
+			$alphabet = $this->generator->alphabet();
+			for($i = 0; $i < $length; $i++)
+				if (in_array($string[$i], $alphabet, true))
+					$count++;
+			return $count;
 		}
 	}

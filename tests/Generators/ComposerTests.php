@@ -41,4 +41,33 @@
 			$this->assertEquals($punctuation, $countPunctuation);
 			$this->assertEquals($letters, $countLetters);
 		}
+		
+		public function testRandomStringsSatisfyComposerRequirements()
+		{
+			$valid = [
+				'o-?^N_Yr4x*tdT3nkgvU',
+				'2U_9w7%3NvM.?_%-n1ar',
+				'C_@rU8>E#Q~2Hc8i]y4g',
+				'rXQtMNA1C*~.t3cb'
+			];
+			
+			$invalid = [
+				'12!@aC',
+				'     ',
+				'monkey123',
+				'password',
+				'Abc123',
+				'Some Password That iS! Bad'
+			];
+			
+			$composer = new RandomStringComposer();
+			$composer->requireDigits(2);
+			$composer->requirePunctuation(2);
+			
+			foreach($valid as $item)
+				$this->assertTrue($composer->satisfiesRequirements($item, 10));
+			
+			foreach($invalid as $item)
+				$this->assertFalse($composer->satisfiesRequirements($item, 10));
+		}
 	}

@@ -12,6 +12,7 @@
 	class RandomStringGenerator
 	{
 		private array $alphabet = [];
+		private string $alphabetString = '';
 		
 		/** Specifies the alphanumeric alphabet. */
 		const ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -53,9 +54,19 @@
 		 */
 		public function alphabet(?string $alphabet = null): array
 		{
-			if (!empty($alphabet))
-				$this->alphabet = is_array($alphabet) ? $alphabet : str_split($alphabet);
+			if (!empty($alphabet)) {
+				$this->alphabetString = $alphabet;
+				$this->alphabet = str_split($alphabet);
+			}
 			return $this->alphabet;
+		}
+		
+		/**
+		 * Gets the alphabet characters as a string.
+		 */
+		public function getAlphabetString(): string
+		{
+			return $this->alphabetString;
 		}
 		
 		/**

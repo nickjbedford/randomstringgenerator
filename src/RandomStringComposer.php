@@ -105,4 +105,32 @@
 			
 			return str_split($input, 1);
 		}
+		
+		/**
+		 * Determines if a string value satisifies the composer's requirements.
+		 * @param string $string The string to test.
+		 * @param int $minimumLength Specifies the minimum length required.
+		 * @return bool
+		 */
+		public function satisfiesRequirements(string $string, int $minimumLength = 0): bool
+		{
+			$length = strlen($string);
+			if ($length < $minimumLength)
+				return false;
+			
+			foreach($this->requirements as $requirement)
+			{
+				$reqCount = $requirement->count();
+				$count = $requirement->matchedCount($string);
+				if ($count < $reqCount)
+					return false;
+				$length -= $count;
+			}
+			if ($length > 0)
+			{
+				$default = new RandomStringRequirement($length, $this->default->getAlphabetString());
+				return $default->matchedCount($string) == $length;
+			}
+			return true;
+		}
 	}
