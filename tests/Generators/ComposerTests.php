@@ -18,10 +18,9 @@
 		
 		/**
 		 * @dataProvider fuzzingDataProvider
-		 * @param int $index
 		 * @throws Exception
 		 */
-		public function testComposerCreatesStringWithCorrectRequirements(int $index)
+		public function testComposerCreatesStringWithCorrectRequirements()
 		{
 			$length = random_int(20, 30);
 			$digits = random_int(1, 5);
