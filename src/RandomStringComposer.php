@@ -27,45 +27,64 @@
 		
 		/**
 		 * Adds a requirement of a specific count of included characters of a specific alphabet.
-		 * @param int $count The number of characters to include from this alphabet.
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
 		 * @param string $alphabet The alphabet to require characters from.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function addRequirement(int $count, string $alphabet): self
+		public function addRequirement(int $maximumCount, string $alphabet, ?int $minimumCount = null): self
 		{
-			if ($count > 0)
-				$this->requirements[] = new RandomStringRequirement($count, $alphabet);
+			if ($maximumCount > 0)
+				return $this->requireExisting(new RandomStringRequirement($maximumCount, $alphabet, $minimumCount));
+			return $this;
+		}
+		
+		/**
+		 * Adds a requirement object of a specific count of included characters of a specific alphabet.
+		 * @param RandomStringRequirement $requirement
+		 * @return self
+		 */
+		public function requireExisting(RandomStringRequirement $requirement): self
+		{
+			$this->requirements[] = $requirement;
 			return $this;
 		}
 		
 		/**
 		 * Requires the specicifed count of digit characters in generated strings.
-		 * @param int $count
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requireDigits(int $count = 1): self
+		public function requireDigits(int $maximumCount = 1, ?int $minimumCount = null): self
 		{
-			return $this->addRequirement($count, RandomStringGenerator::ALPHABET_DIGITS);
+			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_DIGITS, $minimumCount);
 		}
 		
 		/**
 		 * Requires the specicifed count of punctuation characters in generated strings.
-		 * @param int $count
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requirePunctuation(int $count = 1): self
+		public function requirePunctuation(int $maximumCount = 1, ?int $minimumCount = null): self
 		{
-			return $this->addRequirement($count, RandomStringGenerator::ALPHABET_PUNCTUATION);
+			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_PUNCTUATION, $minimumCount);
 		}
 		
 		/**
 		 * Requires the specicifed count of letter characters in generated strings.
-		 * @param int $count
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requireLetters(int $count = 1): self
+		public function requireLetters(int $maximumCount, ?int $minimumCount = null): self
 		{
-			return $this->addRequirement($count, RandomStringGenerator::ALPHABET_LETTERS);
+			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_LETTERS, $minimumCount);
 		}
 		
 		/**
@@ -110,9 +129,11 @@
 		 * Determines if a string value satisifies the composer's requirements.
 		 * @param string $string The string to test.
 		 * @param int $minimumLength Specifies the minimum length required.
+		 * @param bool $strictCounting Whether to require that no more than the maximum count of characters
+		 * from each requirement is included.
 		 * @return bool
 		 */
-		public function satisfiesRequirements(string $string, int $minimumLength = 0): bool
+		public function satisfiesRequirements(string $string, int $minimumLength = 0, bool $strictCounting = true): bool
 		{
 			$length = strlen($string);
 			if ($length < $minimumLength)
@@ -120,12 +141,17 @@
 			
 			foreach($this->requirements as $requirement)
 			{
-				$reqCount = $requirement->count();
 				$count = $requirement->matchedCount($string);
-				if ($count < $reqCount)
+				
+				if ($count < $requirement->minimumCount())
 					return false;
+				
+				if ($strictCounting && $count > $requirement->maximumCount())
+					return false;
+				
 				$length -= $count;
 			}
+			
 			if ($length > 0)
 			{
 				$default = new RandomStringRequirement($length, $this->default->getAlphabetString());

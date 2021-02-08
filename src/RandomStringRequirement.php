@@ -9,18 +9,33 @@
 	 */
 	class RandomStringRequirement
 	{
-		private int $count;
+		private int $maximumCount;
+		private int $minimumCount;
 		private RandomStringGenerator $generator;
 		
-		public function __construct(int $count, string $alphabet)
+		public function __construct(int $maximumCount, string $alphabet, ?int $minimumCount = null)
 		{
-			$this->count = max(1, $count);
+			$this->maximumCount = max(1, $maximumCount);
+			$this->minimumCount = max(0, min($this->maximumCount, $minimumCount ?? $this->maximumCount));
 			$this->generator = new RandomStringGenerator($alphabet);
 		}
 		
-		public function count(): int
+		/**
+		 * Gets the maximum number of characters to require from this alphabet.
+		 * @return int
+		 */
+		public function maximumCount(): int
 		{
-			return $this->count;
+			return $this->maximumCount;
+		}
+		
+		/**
+		 * Gets the minimum number of characters to require from this alphabet.
+		 * @return int
+		 */
+		public function minimumCount(): int
+		{
+			return $this->minimumCount;
 		}
 		
 		/**
@@ -30,7 +45,8 @@
 		 */
 		public function generate(): string
 		{
-			return $this->generator->createString($this->count);
+			$count = random_int($this->minimumCount, $this->maximumCount);
+			return $this->generator->createString($count);
 		}
 		
 		/**

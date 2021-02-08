@@ -31,10 +31,11 @@
 		 * @param int $length The length of the random string to generate.
 		 * @param int $digits The number of digits to require.
 		 * @param int $punctuation The number of punctuation marks to require.
+		 * @param RandomStringComposer|null $composer An optional variable to receive the created random string composer.
 		 * @return string
 		 * @throws Exception
 		 */
-		function compose_random_string(int $length = 16, int $digits = 1, int $punctuation = 1): string
+		function compose_random_string(int $length = 16, int $digits = 1, int $punctuation = 1, ?RandomStringComposer &$composer = null): string
 		{
 			$composer = new RandomStringComposer();
 			$composer->requireDigits($digits);

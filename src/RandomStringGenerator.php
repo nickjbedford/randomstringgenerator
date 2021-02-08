@@ -77,6 +77,9 @@
 		 */
 		public function createString(int $length = 16): string
 		{
+			if ($length < 1)
+				return '';
+			
 			$alphabetLength = count($this->alphabet);
 			$bytes = random_bytes($length);
 			
