@@ -31,11 +31,4 @@
 					$this->assertTrue(in_array($string[$i], $alphabetArray, true));
 			}
 		}
-		
-		public function testGeneratedStringWasCryptoStrong()
-		{
-			$generator = new RandomStringGenerator();
-			$this->assertEquals(16, strlen($generator->createString()));
-			$this->assertTrue($generator->wasCryptoStrong);
-		}
 	}

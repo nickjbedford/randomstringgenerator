@@ -13,8 +13,10 @@
 	class RandomStringComposer
 	{
 		/** @var RandomStringRequirement[] $requirements */
-		private array $requirements = [];
-		private RandomStringGenerator $default;
+		private $requirements = [];
+		
+		/** @var RandomStringGenerator $default */
+		private $default;
 		
 		/**
 		 * Initialises the composer with a default alphabet (defaults to letter characters only).
@@ -122,7 +124,7 @@
 			if ($remaining = max(0, $length - strlen($input)))
 				$input .= $this->default->createString($remaining);
 			
-			return str_split($input, 1);
+			return str_split($input);
 		}
 		
 		/**

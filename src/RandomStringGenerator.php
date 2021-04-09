@@ -11,8 +11,11 @@
 	 */
 	class RandomStringGenerator
 	{
-		private array $alphabet = [];
-		private string $alphabetString = '';
+		/** @var array $alphabet */
+		private $alphabet = [];
+		
+		/** @var string $alphabetString */
+		private $alphabetString = '';
 		
 		/** Specifies the alphanumeric alphabet. */
 		const ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
