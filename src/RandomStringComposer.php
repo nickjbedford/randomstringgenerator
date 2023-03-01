@@ -84,7 +84,7 @@
 		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requireLetters(int $maximumCount, ?int $minimumCount = null): self
+		public function requireLetters(int $maximumCount = 1, ?int $minimumCount = null): self
 		{
 			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_LETTERS, $minimumCount);
 		}
@@ -96,7 +96,7 @@
 		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requireLowercaseLetters(int $maximumCount, ?int $minimumCount = null): self
+		public function requireLowercaseLetters(int $maximumCount = 1, ?int $minimumCount = null): self
 		{
 			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_LOWERCASE, $minimumCount);
 		}
@@ -108,7 +108,7 @@
 		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
 		 * @return self
 		 */
-		public function requireUppercaseLetters(int $maximumCount, ?int $minimumCount = null): self
+		public function requireUppercaseLetters(int $maximumCount = 1, ?int $minimumCount = null): self
 		{
 			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_UPPERCASE, $minimumCount);
 		}
