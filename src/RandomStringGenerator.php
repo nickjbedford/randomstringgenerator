@@ -26,6 +26,12 @@
 		/** Specifies the letters alphabet. */
 		const ALPHABET_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
+		/** Specifies the lowercase letters alphabet. */
+		const ALPHABET_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+		
+		/** Specifies the uppercase letters alphabet. */
+		const ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
 		/** Specifies the uppercase hexadecimal alphabet. */
 		const ALPHABET_HEX_UPPER = '0123456789ABCDEF';
 		

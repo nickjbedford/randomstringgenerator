@@ -90,6 +90,30 @@
 		}
 		
 		/**
+		 * Requires the specicifed count of lowercase letter characters in generated strings.
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
+		 * @return self
+		 */
+		public function requireLowercaseLetters(int $maximumCount, ?int $minimumCount = null): self
+		{
+			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_LOWERCASE, $minimumCount);
+		}
+		
+		/**
+		 * Requires the specicifed count of uppercase letter characters in generated strings.
+		 * @param int $maximumCount The number of characters to include from this alphabet. If $minimumCount is
+		 * specified, this will specify the maximum number of characters to include.
+		 * @param int|null $minimumCount Optional. A minimum number of characters to include.
+		 * @return self
+		 */
+		public function requireUppercaseLetters(int $maximumCount, ?int $minimumCount = null): self
+		{
+			return $this->addRequirement($maximumCount, RandomStringGenerator::ALPHABET_UPPERCASE, $minimumCount);
+		}
+		
+		/**
 		 * Creates a new string based on the specified requirements.
 		 * @param int $length The length of the generated string.
 		 * @return string
