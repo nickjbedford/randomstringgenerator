@@ -44,6 +44,9 @@
 		/** Specifies the set of non-alphanumeric punctuation related characters. */
 		const ALPHABET_PUNCTUATION = '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
 		
+		/** Specifies a simplified subset of non-alphanumeric punctuation related characters. */
+		const ALPHABET_PUNCTUATION_SIMPLE = '!#$%&*+=@^_~`';
+		
 		/** Specifies the entire printable ASCII character set. */
 		const ALPHABET_ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 		
