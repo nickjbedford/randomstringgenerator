@@ -57,6 +57,42 @@
 		}
 		
 		/**
+		 * Generates a string containing one random digit character.
+		 * @throws Exception
+		 */
+		public static function randomDigit(): string
+		{
+			return (new static(static::ALPHABET_DIGITS))->createString(1);
+		}
+		
+		/**
+		 * Generates a string containing one random punctuation character.
+		 * @throws Exception
+		 */
+		public static function randomPunctuation(): string
+		{
+			return (new static(static::ALPHABET_PUNCTUATION))->createString(1);
+		}
+		
+		/**
+		 * Generates a string containing one random lowercase alphabet character.
+		 * @throws Exception
+		 */
+		public static function randomLowercase(): string
+		{
+			return (new static(static::ALPHABET_LOWERCASE))->createString(1);
+		}
+		
+		/**
+		 * Generates a string containing one random uppercase alphabet character.
+		 * @throws Exception
+		 */
+		public static function randomUppercase(): string
+		{
+			return (new static(static::ALPHABET_UPPERCASE))->createString(1);
+		}
+		
+		/**
 		 * Gets and optionally sets the random string alphabet to use.
 		 * @param string[]|string|null $alphabet The new alphabet to use, in string or string array form.
 		 * @return string[] The alphabet used by the random string generator.
