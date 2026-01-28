@@ -3,6 +3,7 @@
 	
 	namespace Generators;
 	
+	use Deprecated;
 	use Exception;
 	
 	/**
@@ -14,8 +15,18 @@
 		/** @var string[] $alphabet */
 		private array $alphabet = [];
 		
-		/** @var string $alphabetString */
-		private string $alphabetString = '';
+		private(set) string $alphabetString = ''
+		{
+			get
+			{
+				return $this->alphabetString;
+			}
+			set
+			{
+				$this->alphabetString = $value;
+				$this->alphabet = str_split($value);
+			}
+		}
 		
 		/** Specifies the alphanumeric alphabet. */
 		const string ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -65,7 +76,7 @@
 		 */
 		public static function randomDigit(): string
 		{
-			return (new static(static::ALPHABET_DIGITS))->createString(1);
+			return new static(static::ALPHABET_DIGITS)->createString(1);
 		}
 		
 		/**
@@ -74,7 +85,7 @@
 		 */
 		public static function randomPunctuation(): string
 		{
-			return (new static(static::ALPHABET_PUNCTUATION))->createString(1);
+			return new static(static::ALPHABET_PUNCTUATION)->createString(1);
 		}
 		
 		/**
@@ -83,7 +94,7 @@
 		 */
 		public static function randomLowercase(): string
 		{
-			return (new static(static::ALPHABET_LOWERCASE))->createString(1);
+			return new static(static::ALPHABET_LOWERCASE)->createString(1);
 		}
 		
 		/**
@@ -92,7 +103,7 @@
 		 */
 		public static function randomUppercase(): string
 		{
-			return (new static(static::ALPHABET_UPPERCASE))->createString(1);
+			return new static(static::ALPHABET_UPPERCASE)->createString(1);
 		}
 		
 		/**
@@ -104,16 +115,15 @@
 		public function alphabet(?string $alphabet = null): array
 		{
 			if (!empty($alphabet))
-			{
 				$this->alphabetString = $alphabet;
-				$this->alphabet = str_split($alphabet);
-			}
 			return $this->alphabet;
 		}
 		
 		/**
-		 * Gets the alphabet characters as a string.
+		 * Gets the alphabet string used by the generator.
+		 * @return string
 		 */
+		#[Deprecated('replace with $random->alphabetString property')]
 		public function getAlphabetString(): string
 		{
 			return $this->alphabetString;

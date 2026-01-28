@@ -179,7 +179,7 @@
 			
 			if ($length > 0)
 			{
-				$default = new RandomStringRequirement($length, $this->default->getAlphabetString());
+				$default = new RandomStringRequirement($length, $this->default->alphabetString);
 				return $default->matchedCount($string) == $length;
 			}
 			return true;
