@@ -4,11 +4,12 @@
 	namespace Generators;
 	
 	use Exception;
+	use PHPUnit\Framework\Attributes\DataProvider;
 	use PHPUnit\Framework\TestCase;
 	
 	class ComposerTests extends TestCase
 	{
-		public function fuzzingDataProvider(): array
+		public static function fuzzingDataProvider(): array
 		{
 			$data = [];
 			for($i = 0; $i < 1000; $i++)
@@ -17,9 +18,9 @@
 		}
 		
 		/**
-		 * @dataProvider fuzzingDataProvider
 		 * @throws Exception
 		 */
+		#[DataProvider('fuzzingDataProvider')]
 		public function testComposerCreatesStringWithCorrectRequirements()
 		{
 			$length = random_int(20, 30);

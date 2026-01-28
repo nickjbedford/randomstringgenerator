@@ -11,44 +11,44 @@
 	 */
 	class RandomStringGenerator
 	{
-		/** @var array $alphabet */
-		private $alphabet = [];
+		/** @var string[] $alphabet */
+		private array $alphabet = [];
 		
 		/** @var string $alphabetString */
-		private $alphabetString = '';
+		private string $alphabetString = '';
 		
 		/** Specifies the alphanumeric alphabet. */
-		const ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		const string ALPHABET_ALPHANUMERIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
 		/** Specifies the digits alphabet. */
-		const ALPHABET_DIGITS = '0123456789';
+		const string ALPHABET_DIGITS = '0123456789';
 		
 		/** Specifies the letters alphabet. */
-		const ALPHABET_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		const string ALPHABET_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
 		/** Specifies the lowercase letters alphabet. */
-		const ALPHABET_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+		const string ALPHABET_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 		
 		/** Specifies the uppercase letters alphabet. */
-		const ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		const string ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
 		/** Specifies the uppercase hexadecimal alphabet. */
-		const ALPHABET_HEX_UPPER = '0123456789ABCDEF';
+		const string ALPHABET_HEX_UPPER = '0123456789ABCDEF';
 		
 		/** Specifies the lowercase hexadecimal alphabet. */
-		const ALPHABET_HEX_LOWER = '0123456789abcdef';
+		const string ALPHABET_HEX_LOWER = '0123456789abcdef';
 		
 		/** Specifies the upper and lowercase hexadecimal alphabet. */
-		const ALPHABET_HEX = '0123456789abcdefABCDEF';
+		const string ALPHABET_HEX = '0123456789abcdefABCDEF';
 		
 		/** Specifies the set of non-alphanumeric punctuation related characters. */
-		const ALPHABET_PUNCTUATION = '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
+		const string ALPHABET_PUNCTUATION = '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
 		
 		/** Specifies a simplified subset of non-alphanumeric punctuation related characters. */
-		const ALPHABET_PUNCTUATION_SIMPLE = '!#$%&*+=@^_~`';
+		const string ALPHABET_PUNCTUATION_SIMPLE = '!#$%&*+=@^_~`';
 		
 		/** Specifies the entire printable ASCII character set. */
-		const ALPHABET_ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+		const string ALPHABET_ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 		
 		/**
 		 * Initialises a new random string generator.
@@ -97,12 +97,14 @@
 		
 		/**
 		 * Gets and optionally sets the random string alphabet to use.
-		 * @param string[]|string|null $alphabet The new alphabet to use, in string or string array form.
+		 *
+		 * @param string|null $alphabet The new alphabet to use, in string or string array form.
 		 * @return string[] The alphabet used by the random string generator.
 		 */
 		public function alphabet(?string $alphabet = null): array
 		{
-			if (!empty($alphabet)) {
+			if (!empty($alphabet))
+			{
 				$this->alphabetString = $alphabet;
 				$this->alphabet = str_split($alphabet);
 			}
@@ -152,8 +154,9 @@
 		
 		/**
 		 * Determines the theoretical number of bits of entropy in a random string for a specified length.
+		 *
 		 * @param int $length The length of the random string being generated.
-		 * @return float|int
+		 * @return float
 		 */
 		public function calculateEntropyBits(int $length = 16): float
 		{

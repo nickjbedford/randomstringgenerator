@@ -9,14 +9,9 @@
 	 */
 	class RandomStringRequirement
 	{
-		/** @var int|mixed $maximumCount */
-		private $maximumCount;
-		
-		/** @var int|mixed $minimumCount */
-		private $minimumCount;
-		
-		/** @var RandomStringGenerator $generator */
-		private $generator;
+		private mixed $maximumCount;
+		private mixed $minimumCount;
+		private RandomStringGenerator $generator;
 		
 		public function __construct(int $maximumCount, string $alphabet, ?int $minimumCount = null)
 		{

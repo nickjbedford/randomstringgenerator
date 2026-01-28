@@ -13,10 +13,9 @@
 	class RandomStringComposer
 	{
 		/** @var RandomStringRequirement[] $requirements */
-		private $requirements = [];
+		private array $requirements = [];
 		
-		/** @var RandomStringGenerator $default */
-		private $default;
+		private RandomStringGenerator $default;
 		
 		/**
 		 * Initialises the composer with a default alphabet (defaults to letter characters only).
