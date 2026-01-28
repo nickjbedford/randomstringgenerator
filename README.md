@@ -2,7 +2,7 @@
 
 `Generator\RandomStringGenerator` generates cryptographically strong random strings based on a supplied alphabet of characters (such as alphanumeric characters). This is perfect for generating API keys within a set of allowed characters. It can also be used to generate strong passwords.
 
-The class relies on the `openssl_pseudo_random_bytes()` function to generate the cryptographically strong random numbers for use in building the random strings.
+The class relies on the `random_bytes()` function to generate the cryptographically strong random numbers for use in building the random strings.
 
 ## Usage
 
