@@ -9,23 +9,20 @@
 	
 	class ComposerTests extends TestCase
 	{
-		public static function fuzzingDataProvider(): array
+		public static function randomLengthPunctuationDataProvider(): array
 		{
 			$data = [];
 			for($i = 0; $i < 1000; $i++)
-				$data[] = [ $i ];
+				$data[] = [ random_int(20, 30), random_int(1, 5), random_int(1, 5) ];
 			return $data;
 		}
 		
 		/**
 		 * @throws Exception
 		 */
-		#[DataProvider('fuzzingDataProvider')]
-		public function testComposerCreatesStringWithCorrectRequirements()
+		#[DataProvider('randomLengthPunctuationDataProvider')]
+		public function testComposerCreatesStringWithCorrectRequirements(int $length, int $digits, int $punctuation)
 		{
-			$length = random_int(20, 30);
-			$digits = random_int(1, 5);
-			$punctuation = random_int(1, 5);
 			$letters = $length - $digits - $punctuation;
 			
 			$string = compose_random_string($length, $digits, $punctuation, $composer);

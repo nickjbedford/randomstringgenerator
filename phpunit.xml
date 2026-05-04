@@ -2,12 +2,8 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 bootstrap="vendor/autoload.php"
 		 colors="true"
-		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./app</directory>
-    </include>
-  </coverage>
+		 displayDetailsOnAllIssues="true"
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.1/phpunit.xsd">
   <testsuites>
     <testsuite name="Unit">
       <directory suffix="Tests.php">./tests/Generators</directory>
